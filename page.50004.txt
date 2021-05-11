@@ -1,0 +1,241 @@
+OBJECT Page 50004 Item Import
+{
+  OBJECT-PROPERTIES
+  {
+    Date=21.05.11;
+    Time=14:14:40;
+    Modified=Yes;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    CaptionML=[ENU=Item Import;
+               HUN=Cikk import];
+    SourceTable=Table50003;
+    PageType=List;
+    ActionList=ACTIONS
+    {
+      { 25      ;    ;ActionContainer;
+                      ActionContainerType=NewDocumentItems }
+      { 26      ;1   ;Action    ;
+                      Name=Process;
+                      CaptionML=[ENU=Process;
+                                 HUN=Feldolgoz s];
+                      RunObject=Report 50007;
+                      Promoted=Yes;
+                      PromotedIsBig=Yes;
+                      Image=Production }
+      { 27      ;1   ;Action    ;
+                      Name=Import;
+                      CaptionML=[ENU=Import;
+                                 HUN=Import];
+                      Description=LI_NA_20210430 T54839 LIAI;
+                      Promoted=Yes;
+                      PromotedIsBig=Yes;
+                      Image=ImportExcel;
+                      PromotedCategory=New;
+                      OnAction=VAR
+                                 cuFileMgnt@1000 : Codeunit 419;
+                                 txtFilePath@1001 : Text;
+                               BEGIN
+                                 //++LI_NA_20210430 T54839 LIAI
+                                 CLEAR(cuFileMgnt);
+                                 txtFilePath := cuFileMgnt.OpenFileDialog('NAV File Browser','*.xlsx','');
+                                 IF txtFilePath<>'' THEN ImportFromExcel(txtFilePath);
+                                 //--LI_NA_20210430 T54839 LIAI
+                               END;
+                                }
+    }
+  }
+  CONTROLS
+  {
+    { 1   ;0   ;Container ;
+                ContainerType=ContentArea }
+
+    { 2   ;1   ;Group     ;
+                Name=Group;
+                GroupType=Repeater }
+
+    { 3   ;2   ;Field     ;
+                SourceExpr="Entry No." }
+
+    { 4   ;2   ;Field     ;
+                SourceExpr="No." }
+
+    { 5   ;2   ;Field     ;
+                SourceExpr=Description }
+
+    { 6   ;2   ;Field     ;
+                SourceExpr="English Description" }
+
+    { 7   ;2   ;Field     ;
+                SourceExpr="German Description" }
+
+    { 8   ;2   ;Field     ;
+                SourceExpr="Additional Name" }
+
+    { 9   ;2   ;Field     ;
+                SourceExpr="Drawing No." }
+
+    { 10  ;2   ;Field     ;
+                SourceExpr=Material }
+
+    { 11  ;2   ;Field     ;
+                SourceExpr="Kind of the part" }
+
+    { 12  ;2   ;Field     ;
+                SourceExpr="Surface Information" }
+
+    { 13  ;2   ;Field     ;
+                SourceExpr="Vendor Item No." }
+
+    { 14  ;2   ;Field     ;
+                SourceExpr="Item Category Code" }
+
+    { 15  ;2   ;Field     ;
+                SourceExpr="Gen. Prod. Posting Group" }
+
+    { 16  ;2   ;Field     ;
+                SourceExpr="VAT Prod. Posting Group" }
+
+    { 17  ;2   ;Field     ;
+                SourceExpr="Inventory Posting Group" }
+
+    { 18  ;2   ;Field     ;
+                SourceExpr="Product Category" }
+
+    { 19  ;2   ;Field     ;
+                SourceExpr="Product Group" }
+
+    { 20  ;2   ;Field     ;
+                SourceExpr="Net Weight" }
+
+    { 21  ;2   ;Field     ;
+                SourceExpr=Quantityunit }
+
+    { 22  ;2   ;Field     ;
+                SourceExpr=Processed }
+
+    { 23  ;2   ;Field     ;
+                SourceExpr="Error Description" }
+
+    { 24  ;2   ;Field     ;
+                SourceExpr="Processed Date" }
+
+  }
+  CODE
+  {
+
+    PROCEDURE ImportFromExcel@3(txtFilePath@1000 : Text);
+    VAR
+      recExcelBuffer@1002 : Record 370;
+      recTempItemImport@1007 : TEMPORARY Record 50003;
+      cuFileMgnt@1008 : Codeunit 419;
+      dlProcess@1003 : Dialog;
+      txtServerFile@1009 : Text;
+      txtSheetName@1001 : Text;
+      TextWork@1004 : TextConst 'ENU=Work #1#####;HUN=Feldolgoz s #1######';
+      intEBDatas@1005 : Integer;
+      intLastRowNo@1006 : Integer;
+    BEGIN
+      //++LI_NA_20210430 T54839 LIAI
+
+      // Init
+      IF txtFilePath = '' THEN BEGIN
+        //ide kell majd belevarni, hogy honnan szedje a file-t
+        EXIT;
+      END;
+      txtSheetName := 'Tabelle1';
+      intLastRowNo := 0;
+      CLEAR(recTempItemImport);
+      recTempItemImport.RESET;
+      recTempItemImport.DELETEALL;
+      recTempItemImport.INIT;
+      //work
+      txtServerFile := cuFileMgnt.UploadFileSilent(txtFilePath);
+      recExcelBuffer.OpenBook(txtServerFile,txtSheetName);
+      recExcelBuffer.ReadSheet;
+      CLEAR(dlProcess);
+      dlProcess.OPEN(TextWork,intEBDatas);
+      recExcelBuffer.RESET;
+      IF recExcelBuffer.FINDSET THEN BEGIN
+        intLastRowNo := recExcelBuffer."Row No.";
+        REPEAT
+          intEBDatas += 1;
+          dlProcess.UPDATE;
+          IF intLastRowNo <> recExcelBuffer."Row No." THEN BEGIN
+             IF intLastRowNo>1 THEN WriteItemImportRecord(recTempItemImport);
+             intLastRowNo := recExcelBuffer."Row No.";
+             CLEAR(recTempItemImport);
+             recTempItemImport.RESET;
+             recTempItemImport.DELETEALL;
+             recTempItemImport.INIT;
+           END;
+           CASE recExcelBuffer."Column No." OF
+             1: recTempItemImport."No."                        := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             2: recTempItemImport.Description                  := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             3: recTempItemImport."English Description"        := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             4: recTempItemImport."German Description"         := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             5: recTempItemImport."Additional Name"            := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             6: recTempItemImport."Drawing No."                := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             7: recTempItemImport.Material                     := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             8: recTempItemImport."Kind of the part"           := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             9: recTempItemImport."Surface Information"        := COPYSTR(recExcelBuffer."Cell Value as Text",1,250);
+             10: recTempItemImport."Vendor Item No."           := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             11: recTempItemImport."Item Category Code"        := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             12: recTempItemImport."Gen. Prod. Posting Group"  := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             13: recTempItemImport."VAT Prod. Posting Group"   := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             14: recTempItemImport."Inventory Posting Group"   := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             15: recTempItemImport."Product Category"          := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             16: recTempItemImport."Product Group"             := COPYSTR(recExcelBuffer."Cell Value as Text",1,100);
+             17: recTempItemImport."Net Weight"                := Text2Decimal(COPYSTR(recExcelBuffer."Cell Value as Text",1,30));
+             18: recTempItemImport.Quantityunit                := COPYSTR(recExcelBuffer."Cell Value as Text",1,20);
+           END; // CASE
+        UNTIL recExcelBuffer.NEXT=0;
+      END;
+      WriteItemImportRecord(recTempItemImport);
+      dlProcess.CLOSE;
+      //--LI_NA_20210430 T54839 LIAI
+    END;
+
+    PROCEDURE Text2Decimal@1000000015(inText@1000000000 : Text[30]) OutDec : Decimal;
+    BEGIN
+      //++LI_NA_20210430 T54839 LIAI
+      IF NOT EVALUATE(OutDec, inText) THEN;
+      //--LI_NA_20210430 T54839 LIAI
+    END;
+
+    LOCAL PROCEDURE WriteItemImportRecord@16(InRec@1000 : Record 50003);
+    VAR
+      recItemImport@1001 : Record 50003;
+      recItemImportWrite@1002 : Record 50003;
+    BEGIN
+      //++LI_NA_20210430 T54839 LIAI
+      //IF InRec.ISEMPTY THEN EXIT;
+      recItemImport.RESET;
+      recItemImport.SETCURRENTKEY("Entry No.","No.");
+      IF recItemImport.FINDLAST THEN BEGIN
+        InRec."Entry No." := recItemImport."Entry No." + 1;
+      END ELSE BEGIN
+        InRec."Entry No." := 1;
+      END;
+      recItemImportWrite.INIT;
+      recItemImportWrite.COPY(InRec);
+      IF NOT recItemImportWrite.INSERT THEN ERROR('¡r shiba:%1',InRec);
+
+      //--LI_NA_20210430 T54839 LIAI
+    END;
+
+    BEGIN
+    {
+      LI_NA_20210430 T54839 LIAI
+        Add new Action: Import
+        Add new procedures:
+          ImportFromExcel
+          Text2Decimal
+          WriteItemImportRecord
+    }
+    END.
+  }
+}
+
