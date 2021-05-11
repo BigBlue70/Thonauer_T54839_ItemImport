@@ -30,3 +30,12 @@ A jövő hét elején kellene.
 Megbeszélés:
 
 Work:
+2021.05.11
+  50003-as tábla kialakítása
+  majd a Robi megoldását kiegészíteni az paraméterekkel
+  5004-es page-re új ACTION
+  Az excel betöltő elkészítése.
+  - file kezelés (serverre feltöltés)
+  - rekord feltöltés
+  - Text2Decimal 
+  Teszt, ok. 
