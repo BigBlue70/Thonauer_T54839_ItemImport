@@ -3,9 +3,9 @@ OBJECT Table 50003 Item Import
   OBJECT-PROPERTIES
   {
     Date=21.05.11;
-    Time=10:08:35;
+    Time=10:50:21;
     Modified=Yes;
-    Version List=LI_NA_20210430 T54839 LIAI;
+    Version List=LIAI;
   }
   PROPERTIES
   {
@@ -15,91 +15,81 @@ OBJECT Table 50003 Item Import
   }
   FIELDS
   {
-    { 10  ;   ;Entry No.           ;Integer       ;AutoIncrement=Yes;
+    { 5   ;   ;Entry No.           ;Integer       ;AutoIncrement=Yes;
                                                    CaptionML=[DEU=Entry No.;
                                                               ENU=Entry No.;
                                                               HUN=TÇtelsz†m] }
-    { 20  ;   ;No.                 ;Code20        ;TableRelation=Item.No.;
-                                                   CaptionML=[DEU=Item No.;
-                                                              ENU=Item No.;
-                                                              HUN=Cikksz†m];
+    { 10  ;   ;No.                 ;Code100       ;CaptionML=[ENU=No.;
+                                                              HUN=Sz†m] }
+    { 20  ;   ;Description         ;Text250       ;CaptionML=[ENU=Description;
+                                                              HUN=MegnevezÇs];
                                                    Description=Excel A coloum - T27-F1 }
-    { 25  ;   ;DescHU1             ;Text50        ;CaptionML=[DEU=Descripton HUN;
-                                                              ENU=Descripton HUN;
-                                                              HUN=Magyar le°r†s];
-                                                   Description=Excel B coloum - T27-F5 }
-    { 30  ;   ;DescHU              ;Text50        ;CaptionML=[DEU=Descripton HUN;
-                                                              ENU=Descripton HUN;
-                                                              HUN=Magyar le°r†s];
-                                                   Description=Excel B coloum - T27-F3 }
-    { 40  ;   ;DescEN              ;Text50        ;CaptionML=[DEU=Description EN;
-                                                              ENU=Description EN;
-                                                              HUN=Angol le°r†s];
+    { 30  ;   ;English Description ;Text250       ;CaptionML=[ENU=English Description;
+                                                              HUN=Angol megnevezÇs];
                                                    Description=Excel C coloum - T27-F50001 }
-    { 45  ;   ;DescEN1             ;Text50        ;CaptionML=[DEU=Description EN;
-                                                              ENU=Description EN;
-                                                              HUN=Angol le°r†s];
+    { 40  ;   ;German Description  ;Text250       ;CaptionML=[ENU=German Description;
+                                                              HUN=NÇmet megnevezÇs];
                                                    Description=Excel C coloum - T27-F50002 }
-    { 50  ;   ;DescDE              ;Text50        ;CaptionML=[DEU=Description DE;
-                                                              ENU=Description DE;
-                                                              HUN=NÇmet le°r†s];
-                                                   Description=Excel D coloum - T27-F50003 }
-    { 55  ;   ;DescDE1             ;Text50        ;CaptionML=[DEU=Description DE;
-                                                              ENU=Description DE;
-                                                              HUN=NÇmet le°r†s];
-                                                   Description=Excel D coloum - T27-F50004 }
-    { 60  ;   ;AdditionalName      ;Text250       ;CaptionML=[DEU=Additional name;
+    { 50  ;   ;Additional Name     ;Text250       ;CaptionML=[DEU=Additional name;
                                                               ENU=Additional name;
                                                               HUN=Hozz†adott megnevezÇs];
                                                    Description=Excel E coloum }
-    { 70  ;   ;DrawingNo           ;Text250       ;CaptionML=[DEU=Drawing No + Index;
+    { 60  ;   ;Drawing No.         ;Text250       ;CaptionML=[DEU=Drawing No + Index;
                                                               ENU=Drawing No + Index;
-                                                              HUN=Rajzsz†m + Index];
+                                                              HUN=Rajzsz†m];
                                                    Description=Excel F Coloum }
-    { 80  ;   ;Material            ;Text250       ;CaptionML=[DEU=Material;
+    { 70  ;   ;Material            ;Text250       ;CaptionML=[DEU=Material;
                                                               ENU=Material;
                                                               HUN=Anyag];
                                                    Description=Excel G coloum }
-    { 90  ;   ;Kint of The Part    ;Text250       ;CaptionML=[DEU=Kint of The Part;
+    { 80  ;   ;Kind of the part    ;Text250       ;CaptionML=[DEU=Kint of The Part;
                                                               ENU=Kint of The Part;
-                                                              HUN=AlkatrÇsz besorol†s];
+                                                              HUN=AlkatrÇszt°pus];
                                                    Description=Excel H coloum }
-    { 100 ;   ;Surfaceinformation  ;Text250       ;CaptionML=[DEU=Surfaceinformation;
+    { 90  ;   ;Surface Information ;Text250       ;CaptionML=[DEU=Surfaceinformation;
                                                               ENU=Surfaceinformation;
-                                                              HUN=FelÅlet inform†ci¢];
+                                                              HUN=FelÅletkezelÇs];
                                                    Description=Excel I coloum }
-    { 110 ;   ;Vendor Item No.     ;Text20        ;CaptionML=[DEU=Vendor Item No.;
-                                                              ENU=Vendor Item No.;
+    { 100 ;   ;Vendor Item No.     ;Text100       ;CaptionML=[ENU=Vendor Item No.;
                                                               HUN=Sz†ll°t¢i cikksz†m];
                                                    Description=Excel J coloum - T27-F32 }
-    { 120 ;   ;Item Category Code  ;Text30        ;CaptionML=[DEU=Item Category Code;
-                                                              ENU=Item Category Code;
-                                                              HUN=Cikk kateg¢ra k¢d];
+    { 110 ;   ;Item Category Code  ;Code100       ;CaptionML=[ENU=Item Category Code;
+                                                              HUN=Cikkcsoportk¢d];
                                                    Description=Excel K coloum }
-    { 130 ;   ;Gen.Prod. Posting Group;Code20     ;CaptionML=[DEU=General Produdct Posting Group;
-                                                              ENU=General Produdct Posting Group;
-                                                              HUN=KÇszlet kînyvelÇsi csoport];
+    { 120 ;   ;Gen. Prod. Posting Group;Code100   ;CaptionML=[ENU=Gen. Prod. Posting Group;
+                                                              HUN=TermÇkkînyvelÇsi csoport];
                                                    Description=Excel L coloum - T27-F11 }
-    { 140 ;   ;VAT Prod. Posting Group;Code20     ;CaptionML=[DEU=VAT Prod. Posting Group;
-                                                              ENU=VAT Prod. Posting Group;
-                                                              HUN=µFA-ÅgyletkînyvelÇsi csoport];
+    { 130 ;   ;VAT Prod. Posting Group;Code100    ;CaptionML=[ENU=VAT Prod. Posting Group;
+                                                              HUN=µfa-termÇkkînyvelÇsi csoport];
                                                    Description=Excel M coloum - T27-F99 }
-    { 150 ;   ;Inventory Posting Group;Text250    ;CaptionML=[DEU=Inventory Posting Group;
-                                                              ENU=Inventory Posting Group;
-                                                              HUN=Rakt†roz†si kînyvelÇsi csoport];
+    { 140 ;   ;Inventory Posting Group;Code100    ;CaptionML=[ENU=Inventory Posting Group;
+                                                              HUN=KÇszletkînyvelÇsi csoport];
                                                    Description=Excel N coloum }
-    { 160 ;   ;Product Category    ;Text250       ;CaptionML=[DEU=Product Category;
-                                                              ENU=TermÇk csoport];
+    { 150 ;   ;Product Category    ;Text100       ;CaptionML=[DEU=Product Category;
+                                                              ENU=Product Category;
+                                                              HUN=TermÇk Kateg¢ria];
                                                    Description=Excel O coloum }
-    { 170 ;   ;Net weight          ;Decimal       ;CaptionML=[DEU=Net weight;
-                                                              ENU=Net weight;
+    { 160 ;   ;Product Group       ;Text100       ;CaptionML=[ENU=Product Group;
+                                                              HUN=TermÇk csoport];
+                                                   Description=Excel P coloum }
+    { 170 ;   ;Net Weight          ;Decimal       ;CaptionML=[ENU=Net Weight;
                                                               HUN=Nett¢ s£ly];
+                                                   DecimalPlaces=0:5;
+                                                   MinValue=0;
                                                    Description=Excel Q coloum - T27-F42 }
-    { 180 ;   ;Quantity Unit       ;Code10        ;Description=Excel R coloum - T27-F8 }
+    { 180 ;   ;Quantityunit        ;Text20        ;CaptionML=[ENU=Quantityunit;
+                                                              HUN=MÇrtÇkegysÇg];
+                                                   Description=Excel R coloum - T27-F8 }
+    { 190 ;   ;Processed           ;Boolean       ;CaptionML=[ENU=Processed;
+                                                              HUN=Feldolgozva] }
+    { 200 ;   ;Error Description   ;Text250       ;CaptionML=[ENU=Error Description;
+                                                              HUN=Hiba le°r†s] }
+    { 210 ;   ;Processed Date      ;DateTime      ;CaptionML=[ENU=Processed Date;
+                                                              HUN=Feldolgoz†s d†tuma] }
   }
   KEYS
   {
-    {    ;Entry No.                               ;Clustered=Yes }
+    {    ;Entry No.,No.                           ;Clustered=Yes }
   }
   FIELDGROUPS
   {
@@ -109,8 +99,10 @@ OBJECT Table 50003 Item Import
 
     BEGIN
     {
+          LI_KR_20210429
+                Create
       LI_NA_20210430 T54839 LIAI
-        Create
+        Modified
     }
     END.
   }
