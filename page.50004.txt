@@ -2,10 +2,10 @@ OBJECT Page 50004 Item Import
 {
   OBJECT-PROPERTIES
   {
-    Date=21.05.11;
-    Time=14:14:40;
+    Date=21.05.12;
+    Time=[ 9:53:43];
     Modified=Yes;
-    Version List=;
+    Version List=LIAI;
   }
   PROPERTIES
   {
@@ -143,16 +143,19 @@ OBJECT Page 50004 Item Import
       // Init
       IF txtFilePath = '' THEN BEGIN
         //ide kell majd belevarni, hogy honnan szedje a file-t
-        EXIT;
+        txtServerFile := 'C:\Navision\AArpad\20210511\Export_0428_CDB.xlsx';
+      END ELSE BEGIN
+        txtServerFile := cuFileMgnt.UploadFileSilent(txtFilePath);
       END;
-      txtSheetName := 'Tabelle1';
+
+      //txtSheetName := 'Tabelle1';
+      txtSheetName := recExcelBuffer.SelectSheetsName(txtServerFile);
       intLastRowNo := 0;
       CLEAR(recTempItemImport);
       recTempItemImport.RESET;
       recTempItemImport.DELETEALL;
       recTempItemImport.INIT;
       //work
-      txtServerFile := cuFileMgnt.UploadFileSilent(txtFilePath);
       recExcelBuffer.OpenBook(txtServerFile,txtSheetName);
       recExcelBuffer.ReadSheet;
       CLEAR(dlProcess);
