@@ -1,0 +1,32 @@
+OBJECT Codeunit 50001 Item Importing
+{
+  OBJECT-PROPERTIES
+  {
+    Date=21.05.12;
+    Time=[ 9:32:30];
+    Modified=Yes;
+    Version List=LIAI;
+  }
+  PROPERTIES
+  {
+    OnRun=VAR
+            pgItemImport@1000 : Page 50004;
+          BEGIN
+            //++LI_NA_20210430 T54839 LIAI
+            pgItemImport.ImportFromExcel('');
+            //--LI_NA_20210430 T54839 LIAI
+          END;
+
+  }
+  CODE
+  {
+
+    BEGIN
+    {
+      LI_NA_20210430 T54839 LIAI
+        Create
+    }
+    END.
+  }
+}
+
