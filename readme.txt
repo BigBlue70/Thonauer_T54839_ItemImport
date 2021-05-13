@@ -29,13 +29,29 @@ Ha a betöltés megvan, akkor kellene egy riportot írni, ami ütemezve meghívj
 A jövő hét elején kellene. 
 Megbeszélés:
 
+- melyik a Pannonos Riport? Esetleg a 50054-es? 500031?  500058? az ihán áll
+- honnan veszi a fileokat?
+
 Work:
 2021.05.11
   50003-as tábla kialakítása
   majd a Robi megoldását kiegészíteni az paraméterekkel
-  5004-es page-re új ACTION
+  50004-es page-re új ACTION
   Az excel betöltő elkészítése.
   - file kezelés (serverre feltöltés)
   - rekord feltöltés
   - Text2Decimal 
-  Teszt, ok. 
+  Teszt, ok.
+2021.05.12
+  cu50001-es készítése
+  Job Query-be beállíani
+  automtatizálásnál hibára futott a DOWLOAD parancs, ezért
+  a 50004-es page ImportExcel függvény átírva: ha üreset kap, akkor egy adott file-t tölt be.
+  A SheetName-t nem kell megadni, mert az elsőt fogja venni.
+  Teszt: ok
+2021.05.3
+  cu50001-es módosítása a pannonos példa alapján
+  átírni serveres megoldásra
+  page rutin átírása, hogy ennek megfeleljen
+  Purch Setup tábla és page -be berakni a figyelendő könyvtár értékét
+   
