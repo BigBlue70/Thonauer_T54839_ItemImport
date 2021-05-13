@@ -2,18 +2,38 @@ OBJECT Codeunit 50001 Item Importing
 {
   OBJECT-PROPERTIES
   {
-    Date=21.05.12;
-    Time=[ 9:32:30];
+    Date=21.05.13;
+    Time=13:52:28;
     Modified=Yes;
     Version List=LIAI;
   }
   PROPERTIES
   {
     OnRun=VAR
+            recPurchSetup@1001 : Record 312;
+            recFileManes@1003 : TEMPORARY Record 823;
+            cuFileMgnt@1002 : Codeunit 419;
             pgItemImport@1000 : Page 50004;
           BEGIN
             //++LI_NA_20210430 T54839 LIAI
-            pgItemImport.ImportFromExcel('');
+            IF NOT recPurchSetup.GET THEN EXIT;
+            IF (NOT recPurchSetup."Item Import Active") OR
+               (recPurchSetup."Item Import Directory" = '') OR
+               (recPurchSetup."Item Import Backup Directory" = '')
+               THEN EXIT;
+
+            cuFileMgnt.GetServerDirectoryFilesList(recFileManes,recPurchSetup."Item Import Directory");
+            recFileManes.RESET;
+            IF recFileManes.FINDSET THEN
+              REPEAT
+                //MESSAGE('%1',recFileManes);
+                pgItemImport.SetServerFileName(recFileManes.Name);
+                IF pgItemImport.ImportFromExcel('') THEN BEGIN
+                  cuFileMgnt.CopyServerFile(recFileManes.Name,recPurchSetup."Item Import Backup Directory"+'\'+cuFileMgnt.GetFileName(recFileManes.Name),TRUE);
+                  cuFileMgnt.DeleteServerFile(recFileManes.Name);
+                  IF TRUE THEN;
+                END;
+              UNTIL recFileManes.NEXT = 0;
             //--LI_NA_20210430 T54839 LIAI
           END;
 
