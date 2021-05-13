@@ -2,8 +2,8 @@ OBJECT Page 50004 Item Import
 {
   OBJECT-PROPERTIES
   {
-    Date=21.05.12;
-    Time=[ 9:53:43];
+    Date=21.05.13;
+    Time=11:56:56;
     Modified=Yes;
     Version List=LIAI;
   }
@@ -125,8 +125,10 @@ OBJECT Page 50004 Item Import
   }
   CODE
   {
+    VAR
+      txIncomingServerFileName@1000 : Text;
 
-    PROCEDURE ImportFromExcel@3(txtFilePath@1000 : Text);
+    PROCEDURE ImportFromExcel@3(txtFilePath@1000 : Text) : Boolean;
     VAR
       recExcelBuffer@1002 : Record 370;
       recTempItemImport@1007 : TEMPORARY Record 50003;
@@ -142,8 +144,8 @@ OBJECT Page 50004 Item Import
 
       // Init
       IF txtFilePath = '' THEN BEGIN
-        //ide kell majd belevarni, hogy honnan szedje a file-t
-        txtServerFile := 'C:\Navision\AArpad\20210511\Export_0428_CDB.xlsx';
+        IF txIncomingServerFileName = '' THEN EXIT;
+        txtServerFile := txIncomingServerFileName;
       END ELSE BEGIN
         txtServerFile := cuFileMgnt.UploadFileSilent(txtFilePath);
       END;
@@ -196,8 +198,8 @@ OBJECT Page 50004 Item Import
            END; // CASE
         UNTIL recExcelBuffer.NEXT=0;
       END;
-      WriteItemImportRecord(recTempItemImport);
       dlProcess.CLOSE;
+      EXIT(WriteItemImportRecord(recTempItemImport));
       //--LI_NA_20210430 T54839 LIAI
     END;
 
@@ -208,7 +210,7 @@ OBJECT Page 50004 Item Import
       //--LI_NA_20210430 T54839 LIAI
     END;
 
-    LOCAL PROCEDURE WriteItemImportRecord@16(InRec@1000 : Record 50003);
+    LOCAL PROCEDURE WriteItemImportRecord@16(InRec@1000 : Record 50003) : Boolean;
     VAR
       recItemImport@1001 : Record 50003;
       recItemImportWrite@1002 : Record 50003;
@@ -224,8 +226,17 @@ OBJECT Page 50004 Item Import
       END;
       recItemImportWrite.INIT;
       recItemImportWrite.COPY(InRec);
-      IF NOT recItemImportWrite.INSERT THEN ERROR('¡r shiba:%1',InRec);
+      //IF NOT recItemImportWrite.INSERT THEN ERROR('¡r shiba:%1',InRec);
+      IF recItemImportWrite.INSERT
+        THEN EXIT(TRUE)
+        ELSE EXIT(FALSE);
+      //--LI_NA_20210430 T54839 LIAI
+    END;
 
+    PROCEDURE SetServerFileName@2(InFileNames@1000 : Text);
+    BEGIN
+      //++LI_NA_20210430 T54839 LIAI
+      txIncomingServerFileName := InFileNames;
       //--LI_NA_20210430 T54839 LIAI
     END;
 
