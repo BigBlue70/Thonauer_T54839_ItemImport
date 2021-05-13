@@ -1,0 +1,214 @@
+OBJECT Table 312 Purchases & Payables Setup
+{
+  OBJECT-PROPERTIES
+  {
+    Date=21.05.13;
+    Time=11:17:08;
+    Modified=Yes;
+    Version List=NAVW18.00,NAVHU8.00,LIAI;
+  }
+  PROPERTIES
+  {
+    CaptionML=[ENU=Purchases & Payables Setup;
+               HUN=BeszerzÇs Çs kîtelezettsÇgek be†ll°t†sa];
+  }
+  FIELDS
+  {
+    { 1   ;   ;Primary Key         ;Code10        ;CaptionML=[ENU=Primary Key;
+                                                              HUN=Elsãdleges kulcs] }
+    { 2   ;   ;Discount Posting    ;Option        ;CaptionML=[ENU=Discount Posting;
+                                                              HUN=EngedmÇny kînyvelÇse];
+                                                   OptionCaptionML=[ENU=No Discounts,Invoice Discounts,Line Discounts,All Discounts;
+                                                                    HUN=Nincs engedmÇny,Sz†mlaengedmÇny,SorengedmÇny,Minden engedmÇny];
+                                                   OptionString=No Discounts,Invoice Discounts,Line Discounts,All Discounts }
+    { 6   ;   ;Receipt on Invoice  ;Boolean       ;AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Receipt on Invoice;
+                                                              HUN=BevÇtjegy a sz†mla mellÇ] }
+    { 7   ;   ;Invoice Rounding    ;Boolean       ;CaptionML=[ENU=Invoice Rounding;
+                                                              HUN=Sz†mla kerek°tÇse] }
+    { 8   ;   ;Ext. Doc. No. Mandatory;Boolean    ;InitValue=Yes;
+                                                   CaptionML=[ENU=Ext. Doc. No. Mandatory;
+                                                              HUN=KÅlsã biz.sz†m kîtelezã] }
+    { 9   ;   ;Vendor Nos.         ;Code10        ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Vendor Nos.;
+                                                              HUN=Sz†ll°t¢k sz†moz†sa] }
+    { 10  ;   ;Quote Nos.          ;Code10        ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Quote Nos.;
+                                                              HUN=Aj†nlatok sz†moz†sa] }
+    { 11  ;   ;Order Nos.          ;Code10        ;TableRelation="No. Series";
+                                                   AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Order Nos.;
+                                                              HUN=RendelÇsek sz†moz†sa] }
+    { 12  ;   ;Invoice Nos.        ;Code10        ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Invoice Nos.;
+                                                              HUN=Sz†ml†k sz†moz†sa] }
+    { 13  ;   ;Posted Invoice Nos. ;Code10        ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Posted Invoice Nos.;
+                                                              HUN=Kînyvelt sz†ml†k sz†moz†sa] }
+    { 14  ;   ;Credit Memo Nos.    ;Code10        ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Credit Memo Nos.;
+                                                              HUN=J¢v†°r†sok sz†moz†sa] }
+    { 15  ;   ;Posted Credit Memo Nos.;Code10     ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Posted Credit Memo Nos.;
+                                                              HUN=Kînyvelt j¢v†°r†sok sz†moz†sa] }
+    { 16  ;   ;Posted Receipt Nos. ;Code10        ;TableRelation="No. Series";
+                                                   AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Posted Receipt Nos.;
+                                                              HUN=Kînyvelt bevÇtjegy sz†moz†sa] }
+    { 19  ;   ;Blanket Order Nos.  ;Code10        ;TableRelation="No. Series";
+                                                   AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Blanket Order Nos.;
+                                                              HUN=KeretszerzãdÇsek sz†moz†sa] }
+    { 20  ;   ;Calc. Inv. Discount ;Boolean       ;AccessByPermission=TableData 24=R;
+                                                   CaptionML=[ENU=Calc. Inv. Discount;
+                                                              HUN=Sz†mlaengedmÇny-sz†m°t†s] }
+    { 21  ;   ;Appln. between Currencies;Option   ;AccessByPermission=TableData 4=R;
+                                                   CaptionML=[ENU=Appln. between Currencies;
+                                                              HUN=Kiegyenl°tÇs pÇnznemek kîzîtt];
+                                                   OptionCaptionML=[ENU=None,EMU,All;
+                                                                    HUN=Nincs,EMU,ôsszes];
+                                                   OptionString=None,EMU,All }
+    { 22  ;   ;Copy Comments Blanket to Order;Boolean;
+                                                   InitValue=Yes;
+                                                   AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Copy Comments Blanket to Order;
+                                                              HUN=Keretsz.megj.m†sol.rendelÇsbe] }
+    { 23  ;   ;Copy Comments Order to Invoice;Boolean;
+                                                   InitValue=Yes;
+                                                   AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Copy Comments Order to Invoice;
+                                                              HUN=RendelÇsi megj.m†sol. sz†ml†ba] }
+    { 24  ;   ;Copy Comments Order to Receipt;Boolean;
+                                                   InitValue=Yes;
+                                                   AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Copy Comments Order to Receipt;
+                                                              HUN=RendelÇsi megj.m†s. bevÇtjegybe] }
+    { 25  ;   ;Allow VAT Difference;Boolean       ;CaptionML=[ENU=Allow VAT Difference;
+                                                              HUN=µfakÅlînbîzet engedÇlyezett] }
+    { 26  ;   ;Calc. Inv. Disc. per VAT ID;Boolean;CaptionML=[ENU=Calc. Inv. Disc. per VAT ID;
+                                                              HUN=Sz†mlaeng.sz†m°t†s †faazonos°t¢nkÇnt] }
+    { 27  ;   ;Posted Prepmt. Inv. Nos.;Code10    ;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Posted Prepmt. Inv. Nos.;
+                                                              HUN=Kînyvelt elãrefiz. sz†mlasz.] }
+    { 28  ;   ;Posted Prepmt. Cr. Memo Nos.;Code10;TableRelation="No. Series";
+                                                   CaptionML=[ENU=Posted Prepmt. Cr. Memo Nos.;
+                                                              HUN=Kînyvelt elãrefiz. j¢v†°r†s-sz.] }
+    { 29  ;   ;Check Prepmt. when Posting;Boolean ;CaptionML=[ENU=Check Prepmt. when Posting;
+                                                              HUN=Elãref. ellenãrz. kînyvelÇskor] }
+    { 35  ;   ;Default Posting Date;Option        ;CaptionML=[ENU=Default Posting Date;
+                                                              HUN=AlapÇrt. kînyvelÇsi d†tum];
+                                                   OptionCaptionML=[ENU=Work Date,No Date;
+                                                                    HUN=Munkad†tum,Nincs d†tum];
+                                                   OptionString=Work Date,No Date }
+    { 36  ;   ;Default Qty. to Receive;Option     ;AccessByPermission=TableData 120=R;
+                                                   CaptionML=[ENU=Default Qty. to Receive;
+                                                              HUN=AlapÇrtelmezett bevÇtelezendã mennyisÇg];
+                                                   OptionCaptionML=[ENU=Remainder,Blank;
+                                                                    HUN=Fennmarad¢,öres];
+                                                   OptionString=Remainder,Blank }
+    { 37  ;   ;Archive Quotes and Orders;Boolean  ;CaptionML=[ENU=Archive Quotes and Orders;
+                                                              HUN=Aj†nlatok Çs rendelÇsek arch.] }
+    { 38  ;   ;Post with Job Queue ;Boolean       ;CaptionML=[ENU=Post with Job Queue;
+                                                              HUN=KînyvelÇs feladat-v†r¢lista haszn†lat†val] }
+    { 39  ;   ;Job Queue Category Code;Code10     ;TableRelation="Job Queue Category";
+                                                   CaptionML=[ENU=Job Queue Category Code;
+                                                              HUN=Feladatv†r¢lista kateg¢ria k¢dja] }
+    { 40  ;   ;Job Queue Priority for Post;Integer;InitValue=1000;
+                                                   OnValidate=BEGIN
+                                                                IF "Job Queue Priority for Post" < 0 THEN
+                                                                  ERROR(Text001);
+                                                              END;
+
+                                                   CaptionML=[ENU=Job Queue Priority for Post;
+                                                              HUN=KînyvelÇs feladatv†r¢lista priorit†s];
+                                                   MinValue=0 }
+    { 41  ;   ;Post & Print with Job Queue;Boolean;CaptionML=[ENU=Post & Print with Job Queue;
+                                                              HUN=KînyvelÇs Çs nyomtat†s feladat-v†r¢lista haszn†lat†val] }
+    { 42  ;   ;Job Q. Prio. for Post & Print;Integer;
+                                                   InitValue=1000;
+                                                   OnValidate=BEGIN
+                                                                IF "Job Queue Priority for Post" < 0 THEN
+                                                                  ERROR(Text001);
+                                                              END;
+
+                                                   CaptionML=[ENU=Job Queue Priority for Post & Print;
+                                                              HUN=KînyvelÇs Çs nyomtat†s feladatv†r¢lista priorit†s];
+                                                   MinValue=0 }
+    { 43  ;   ;Notify On Success   ;Boolean       ;CaptionML=[ENU=Notify On Success;
+                                                              HUN=SikeressÇg esetÇn Çrtes°tÇs] }
+    { 5800;   ;Posted Return Shpt. Nos.;Code10    ;TableRelation="No. Series";
+                                                   AccessByPermission=TableData 6650=R;
+                                                   CaptionML=[ENU=Posted Return Shpt. Nos.;
+                                                              HUN=Kînyv.vissz†ru-sz†ll.sz†moz†sa] }
+    { 5801;   ;Copy Cmts Ret.Ord. to Ret.Shpt;Boolean;
+                                                   InitValue=Yes;
+                                                   AccessByPermission=TableData 6650=R;
+                                                   CaptionML=[ENU=Copy Cmts Ret.Ord. to Ret.Shpt;
+                                                              HUN=Vissz†rurend.m†sol.vissz.sz†ll] }
+    { 5802;   ;Copy Cmts Ret.Ord. to Cr. Memo;Boolean;
+                                                   InitValue=Yes;
+                                                   AccessByPermission=TableData 6650=R;
+                                                   CaptionML=[ENU=Copy Cmts Ret.Ord. to Cr. Memo;
+                                                              HUN=Vissz†rurend.m†sol†s j¢v†°r.ba] }
+    { 6600;   ;Return Order Nos.   ;Code10        ;TableRelation="No. Series";
+                                                   AccessByPermission=TableData 6650=R;
+                                                   CaptionML=[ENU=Return Order Nos.;
+                                                              HUN=Vissz†rurendelÇsek sz†moz†sa] }
+    { 6601;   ;Return Shipment on Credit Memo;Boolean;
+                                                   AccessByPermission=TableData 6650=R;
+                                                   CaptionML=[ENU=Return Shipment on Credit Memo;
+                                                              HUN=Vissz†ru-sz†ll. j¢v†°r†son] }
+    { 6602;   ;Exact Cost Reversing Mandatory;Boolean;
+                                                   CaptionML=[ENU=Exact Cost Reversing Mandatory;
+                                                              HUN=Pontos ktg.vissza†ll.kîtelezã] }
+    { 50000;  ;Item Import Directory;Text250      ;CaptionML=[ENU=Item Import Directory;
+                                                              HUN=Cikk import kînyvt†r];
+                                                   Description=LI_NA_20210430 T54839 LIAI }
+    { 50010;  ;Item Import Backup Directory;Text250;
+                                                   CaptionML=[ENU=Item Import Backup Directory;
+                                                              HUN=Cikk import mentÇs kînyvt†r];
+                                                   Description=LI_NA_20210430 T54839 LIAI }
+    { 50020;  ;Item Import Active  ;Boolean       ;Description=LI_NA_20210430 T54839 LIAI }
+    { 42017100;;Posted Doc. Deletion to Date;Date ;CaptionML=[ENU=Posted Doc. Deletion to Date;
+                                                              HUN=Kînyvelt biz. tîrlÇse d†tumig];
+                                                   Description=Delete }
+    { 42017580;;Default VAT Date   ;Option        ;CaptionML=[ENU=Default VAT Date;
+                                                              HUN=AlapÇrtelmezett †fateljes°tÇsi d†tum];
+                                                   OptionCaptionML=[ENU=Posting Date,Document Date,Blank;
+                                                                    HUN=KînyvelÇsi d†tum,Bizonylatd†tum,öres];
+                                                   OptionString=Posting Date,Document Date,Blank }
+  }
+  KEYS
+  {
+    {    ;Primary Key                             ;Clustered=Yes }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+    VAR
+      Text001@1000 : TextConst 'ENU=Job Queue Priority must be zero or positive.;HUN=Feladatv†r¢lista priorit†s legyen 0 vagy pozit°v.';
+
+    PROCEDURE JobQueueActive@1() : Boolean;
+    BEGIN
+      GET;
+      EXIT("Post with Job Queue" OR "Post & Print with Job Queue");
+    END;
+
+    BEGIN
+    {
+      NAVHU8.00
+        Delete 20131021 MM
+          New Field 42017100 - Posted Doc. Deletion to Date - Date
+        VAT 2013128 HL
+          New field Default VAT Date
+
+      LI_NA_20210430 T54839 LIAI
+        Add new field:
+          "Item Import Directory","Item Import Backup Directory"
+    }
+    END.
+  }
+}
+

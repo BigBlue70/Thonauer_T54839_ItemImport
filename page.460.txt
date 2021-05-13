@@ -1,0 +1,228 @@
+OBJECT Page 460 Purchases & Payables Setup
+{
+  OBJECT-PROPERTIES
+  {
+    Date=21.05.13;
+    Time=11:17:33;
+    Modified=Yes;
+    Version List=NAVW17.00,NAVHU7.10,LIAI;
+  }
+  PROPERTIES
+  {
+    CaptionML=[ENU=Purchases & Payables Setup;
+               HUN=Beszerz‚s ‚s k”telezetts‚gek be ll¡t sa];
+    InsertAllowed=No;
+    DeleteAllowed=No;
+    SourceTable=Table312;
+    DataCaptionExpr='';
+    PageType=Card;
+    OnOpenPage=BEGIN
+                 RESET;
+                 IF NOT GET THEN BEGIN
+                   INIT;
+                   INSERT;
+                 END;
+               END;
+
+  }
+  CONTROLS
+  {
+    { 1900000001;0;Container;
+                ContainerType=ContentArea }
+
+    { 1   ;1   ;Group     ;
+                CaptionML=[ENU=General;
+                           HUN=µltal nos] }
+
+    { 2   ;2   ;Field     ;
+                SourceExpr="Discount Posting" }
+
+    { 4   ;2   ;Field     ;
+                SourceExpr="Receipt on Invoice" }
+
+    { 32  ;2   ;Field     ;
+                SourceExpr="Return Shipment on Credit Memo" }
+
+    { 6   ;2   ;Field     ;
+                SourceExpr="Invoice Rounding" }
+
+    { 8   ;2   ;Field     ;
+                SourceExpr="Ext. Doc. No. Mandatory" }
+
+    { 24  ;2   ;Field     ;
+                SourceExpr="Allow VAT Difference" }
+
+    { 10  ;2   ;Field     ;
+                SourceExpr="Calc. Inv. Discount" }
+
+    { 28  ;2   ;Field     ;
+                SourceExpr="Calc. Inv. Disc. per VAT ID" }
+
+    { 22  ;2   ;Field     ;
+                SourceExpr="Appln. between Currencies" }
+
+    { 12  ;2   ;Field     ;
+                SourceExpr="Copy Comments Blanket to Order" }
+
+    { 16  ;2   ;Field     ;
+                SourceExpr="Copy Comments Order to Invoice" }
+
+    { 18  ;2   ;Field     ;
+                SourceExpr="Copy Comments Order to Receipt" }
+
+    { 36  ;2   ;Field     ;
+                SourceExpr="Copy Cmts Ret.Ord. to Cr. Memo" }
+
+    { 30  ;2   ;Field     ;
+                SourceExpr="Copy Cmts Ret.Ord. to Ret.Shpt" }
+
+    { 38  ;2   ;Field     ;
+                SourceExpr="Exact Cost Reversing Mandatory" }
+
+    { 55  ;2   ;Field     ;
+                SourceExpr="Check Prepmt. when Posting" }
+
+    { 57  ;2   ;Field     ;
+                SourceExpr="Archive Quotes and Orders" }
+
+    { 59  ;2   ;Field     ;
+                SourceExpr="Default Posting Date" }
+
+    { 61  ;2   ;Field     ;
+                SourceExpr="Default Qty. to Receive" }
+
+    { 21  ;2   ;Field     ;
+                SourceExpr="Posted Doc. Deletion to Date" }
+
+    { 25  ;2   ;Field     ;
+                SourceExpr="Default VAT Date" }
+
+    { 1904569201;1;Group  ;
+                CaptionML=[ENU=Numbering;
+                           HUN=Sz moz s] }
+
+    { 83  ;2   ;Field     ;
+                SourceExpr="Vendor Nos." }
+
+    { 42  ;2   ;Field     ;
+                SourceExpr="Quote Nos." }
+
+    { 14  ;2   ;Field     ;
+                SourceExpr="Blanket Order Nos." }
+
+    { 44  ;2   ;Field     ;
+                SourceExpr="Order Nos." }
+
+    { 34  ;2   ;Field     ;
+                SourceExpr="Return Order Nos." }
+
+    { 20  ;2   ;Field     ;
+                SourceExpr="Invoice Nos." }
+
+    { 48  ;2   ;Field     ;
+                SourceExpr="Posted Invoice Nos." }
+
+    { 87  ;2   ;Field     ;
+                SourceExpr="Credit Memo Nos." }
+
+    { 50  ;2   ;Field     ;
+                SourceExpr="Posted Credit Memo Nos." }
+
+    { 46  ;2   ;Field     ;
+                SourceExpr="Posted Receipt Nos." }
+
+    { 26  ;2   ;Field     ;
+                SourceExpr="Posted Return Shpt. Nos." }
+
+    { 52  ;2   ;Field     ;
+                SourceExpr="Posted Prepmt. Inv. Nos." }
+
+    { 40  ;2   ;Field     ;
+                SourceExpr="Posted Prepmt. Cr. Memo Nos." }
+
+    { 7   ;1   ;Group     ;
+                CaptionML=[ENU=Background Posting;
+                           HUN=H tt‚rk”nyvel‚s];
+                GroupType=Group }
+
+    { 23  ;2   ;Group     ;
+                CaptionML=[ENU=Post;
+                           HUN=K”nyvel‚s];
+                GroupType=Group }
+
+    { 19  ;3   ;Field     ;
+                SourceExpr="Post with Job Queue" }
+
+    { 17  ;3   ;Field     ;
+                SourceExpr="Job Queue Priority for Post" }
+
+    { 13  ;2   ;Group     ;
+                CaptionML=[ENU=Post & Print;
+                           HUN=K”nyvel‚s ‚s nyomtat s];
+                GroupType=Group }
+
+    { 15  ;3   ;Field     ;
+                SourceExpr="Post & Print with Job Queue" }
+
+    { 11  ;3   ;Field     ;
+                SourceExpr="Job Q. Prio. for Post & Print" }
+
+    { 9   ;2   ;Group     ;
+                CaptionML=[ENU=General;
+                           HUN=µltal nos];
+                GroupType=Group }
+
+    { 5   ;3   ;Field     ;
+                SourceExpr="Job Queue Category Code" }
+
+    { 3   ;3   ;Field     ;
+                SourceExpr="Notify On Success" }
+
+    { 27  ;1   ;Group     ;
+                CaptionML=[ENU=Automatic Item Import;
+                           HUN=Automatikus cikk import l s];
+                Description=LI_NA_20210430 T54839 LIAI;
+                GroupType=Group }
+
+    { 33  ;2   ;Field     ;
+                Description=LI_NA_20210430 T54839 LIAI;
+                SourceExpr="Item Import Active" }
+
+    { 29  ;2   ;Field     ;
+                Description=LI_NA_20210430 T54839 LIAI;
+                SourceExpr="Item Import Directory" }
+
+    { 31  ;2   ;Field     ;
+                Description=LI_NA_20210430 T54839 LIAI;
+                SourceExpr="Item Import Backup Directory" }
+
+    { 1900000007;0;Container;
+                ContainerType=FactBoxArea }
+
+    { 1900383207;1;Part   ;
+                Visible=FALSE;
+                PartType=System;
+                SystemPartID=RecordLinks }
+
+    { 1905767507;1;Part   ;
+                Visible=FALSE;
+                PartType=System;
+                SystemPartID=Notes }
+
+  }
+  CODE
+  {
+
+    BEGIN
+    {
+      NAVHU7.10
+        Delete 20131021 MM
+          New Field 42017100 - Posted Doc. Deletion to Date - Date
+
+      LI_NA_20210430 T54839 LIAI
+        Add new Group and field: "Item Import Directory", "Item Import Backup Directory"
+    }
+    END.
+  }
+}
+
